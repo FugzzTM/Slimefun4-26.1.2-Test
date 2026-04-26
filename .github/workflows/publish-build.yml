@@ -9,7 +9,7 @@ on:
 
 jobs:
   publish:
-    name: Upload build
+    name: Build and upload JAR
     runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, '[ci skip]') == false
 
@@ -27,32 +27,9 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Upload Dev build
-        uses: WalshyDev/blob-builds/gh-action@ea9ecd9266c902c6627f884e657560d0fa6b61dd
-        if: github.ref == 'refs/heads/master'
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          project: Slimefun4
-          releaseChannel: Dev
-          apiToken: ${{ secrets.BLOB_BUILDS_API_TOKEN }}
-          file: './target/Slimefun v4.9-UNOFFICIAL.jar'
-          releaseNotes: ${{ github.event.head_commit.message }}
-
-      - name: Upload RC build
-        uses: WalshyDev/blob-builds/gh-action@ea9ecd9266c902c6627f884e657560d0fa6b61dd
-        if: github.ref == 'refs/heads/stable'
-        with:
-          project: Slimefun4
-          releaseChannel: 'RC'
-          apiToken: ${{ secrets.BLOB_BUILDS_API_TOKEN }}
-          file: './target/Slimefun v4.9-UNOFFICIAL.jar'
-          releaseNotes: ${{ github.event.head_commit.message }}
-    
-      - name: Upload Experimental build
-        uses: WalshyDev/blob-builds/gh-action@ea9ecd9266c902c6627f884e657560d0fa6b61dd
-        if: github.ref == 'refs/heads/experimental'
-        with:
-          project: Slimefun4
-          releaseChannel: 'Experimental'
-          apiToken: ${{ secrets.BLOB_BUILDS_API_TOKEN }}
-          file: './target/Slimefun v4.9-UNOFFICIAL.jar'
-          releaseNotes: ${{ github.event.head_commit.message }}
+          name: Slimefun-${{ github.ref_name }}-${{ github.sha }}
+          path: './target/Slimefun v4-Unofficial.jar'
+          retention-days: 90
