@@ -26,6 +26,9 @@ public final class GEOResourcesSetup {
     private static void registerSafe(Runnable task, String resourceName) {
         try {
             task.run();
+        } catch (IllegalArgumentException e) {
+            // Re-throw programming errors like double-registration
+            throw e;
         } catch (LinkageError | Exception e) {
             Slimefun.logger().log(Level.WARNING, "Skipping GEO resource \"{0}\" because it could not be initialized.", resourceName);
             Slimefun.logger().log(Level.WARNING, e, () -> "Failed to register GEO resource \"" + resourceName + "\"");
