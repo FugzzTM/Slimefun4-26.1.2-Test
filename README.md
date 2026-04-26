@@ -1,6 +1,6 @@
 # Slimefun 4 — Experimental Patch for Minecraft 26.1.2
 
-> **⚠️ UNOFFICIAL BUILD** — This is a one-person, vibe-coded patch / update of [Slimefun 4](https://github.com/Slimefun/Slimefun4) to get it running on Minecraft **Paper 26.1.2** (not a typo). Spigot is untested.
+> **⚠️ UNOFFICIAL BUILD** — This is a one-person, vibe-coded patch / update of [Slimefun 4](https://github.com/Slimefun/Slimefun4) to get it running on Minecraft **Paper 26.1.2**. Spigot is untested.
 
 ---
 
